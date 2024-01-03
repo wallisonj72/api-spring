@@ -2,7 +2,6 @@ package com.wallison.api.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wallison.api.model.Student;
@@ -23,7 +22,8 @@ public record StudentService(StudentRepository studentRepository) {
         studentRepository.deleteById(id);
     }
 
-    public Student edit(Long id) {
-        return studentRepository.findById(id).orElse(null);
+    public Student edit(Long id, Student newStudent) {
+        newStudent.setId(id);
+        return studentRepository.save(newStudent);
     }
 }
